@@ -1,4 +1,4 @@
-﻿namespace Restaurant
+﻿namespace Restaurant.models
 {
     public class PozycjaZamowienia
     {

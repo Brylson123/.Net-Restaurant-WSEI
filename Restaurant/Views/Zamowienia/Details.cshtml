@@ -1,0 +1,29 @@
+﻿@model Restaurant.models.Zamowienie
+
+<h2>Szczegóły zamówienia</h2>
+
+<p><strong>ID zamówienia:</strong> @Model.Id</p>
+<p><strong>Data zamówienia:</strong> @Model.DataUtworzenia.ToString("g")</p>
+
+<h4>Pozycje:</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa dania</th>
+            <th>Ilość</th>
+            <th>Cena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pozycja in Model.Pozycje)
+        {
+            <tr>
+                <td>@pozycja.Danie?.Nazwa</td>
+                <td>@pozycja.Ilosc</td>
+                <td>@(pozycja.Danie?.Cena * pozycja.Ilosc)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-secondary">Powrót</a>

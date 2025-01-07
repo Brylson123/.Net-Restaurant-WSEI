@@ -1,0 +1,24 @@
+﻿@model Restaurant.models.Danie
+
+<h2>Edytuj danie</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label for="Nazwa">Nazwa</label>
+        <input asp-for="Nazwa" class="form-control" />
+        <span asp-validation-for="Nazwa" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Cena">Cena</label>
+        <input asp-for="Cena" class="form-control" />
+        <span asp-validation-for="Cena" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="KategoriaDaniaId">Kategoria</label>
+        <select asp-for="KategoriaDaniaId" asp-items="ViewBag.Kategorie" class="form-control"></select>
+        <span asp-validation-for="KategoriaDaniaId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+</form>

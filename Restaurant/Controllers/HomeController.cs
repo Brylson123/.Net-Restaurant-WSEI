@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Restaurant.Models;
+using Restaurant.models;
 using System.Diagnostics;
 
 namespace Restaurant.Controllers

@@ -1,0 +1,17 @@
+﻿@model Restaurant.models.Danie
+
+<h2>Usuń danie</h2>
+
+<div>
+    <h3>Czy na pewno chcesz usunąć to danie?</h3>
+    <p>
+        <strong>Nazwa:</strong> @Model.Nazwa<br />
+        <strong>Cena:</strong> @Model.Cena<br />
+        <strong>Kategoria:</strong> @Model.KategoriaDania?.Nazwa
+    </p>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Usuń</button>
+        <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>

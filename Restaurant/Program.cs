@@ -30,6 +30,7 @@ namespace Restaurant
             {
                 var db = scope.ServiceProvider.GetRequiredService<RestaurantDbContext>();
                 db.Database.Migrate();
+                SeedData(scope.ServiceProvider);
             }
 
             if (!app.Environment.IsDevelopment())
@@ -46,9 +47,41 @@ namespace Restaurant
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Login}/{id?}");
 
             app.Run();
+        }
+
+        private static void SeedData(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<Uzytkownik>>();
+
+            if (!roleManager.RoleExistsAsync("Admin").Result)
+            {
+                roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
+            }
+
+            if (!roleManager.RoleExistsAsync("User").Result)
+            {
+                roleManager.CreateAsync(new IdentityRole("User")).Wait();
+            }
+
+            if (!userManager.Users.Any(u => u.UserName == "admin@restaurant.com"))
+            {
+                var admin = new Uzytkownik
+                {
+                    UserName = "admin@restaurant.com",
+                    Email = "admin@restaurant.com",
+                    EmailConfirmed = true
+                };
+
+                var result = userManager.CreateAsync(admin, "Admin@123").Result;
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(admin, "Admin").Wait();
+                }
+            }
         }
     }
 }

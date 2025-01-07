@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Restaurant.models.Danie>
+
+<h2>Zarządzanie daniami</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Cena</th>
+            <th>Kategoria</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var danie in Model)
+        {
+            <tr>
+                <td>@danie.Nazwa</td>
+                <td>@danie.Cena.ToString("C")</td>
+                <td>@danie.KategoriaDania?.Nazwa</td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Dania" asp-route-id="@danie.Id" class="btn btn-primary">Edytuj</a>
+                    <a asp-action="Delete" asp-controller="Dania" asp-route-id="@danie.Id" class="btn btn-danger">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Create" asp-controller="Dania" class="btn btn-success">Dodaj nowe danie</a>

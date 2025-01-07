@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Restaurant.models.Zamowienie>
+
+<h2>Zarządzanie zamówieniami</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Użytkownik</th>
+            <th>Data</th>
+            <th>Liczba pozycji</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var zamowienie in Model)
+        {
+            <tr>
+                <td>@zamowienie.Id</td>
+                <td>@zamowienie.Uzytkownik?.Email</td>
+                <td>@zamowienie.DataUtworzenia</td>
+                <td>@zamowienie.Pozycje?.Count</td>
+                <td>
+                    <a asp-action="ZamowienieDetails" asp-route-id="@zamowienie.Id" class="btn btn-info">Szczegóły</a>
+                    <form asp-action="DeleteZamowienie" asp-route-id="@zamowienie.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Restaurant.models.Danie>
+
+<h2>Stwórz zamówienie</h2>
+
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Danie</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var danie in Model)
+            {
+                <tr>
+                    <td>@danie.Nazwa</td>
+                    <td>@danie.Cena.ToString("C")</td>
+                    <td>
+                        <input type="number" name="wybrane[@danie.Id]" value="0" min="0" class="form-control" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Zamów</button>
+</form>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Restaurant.models.Zamowienie>
+
+<h2>Historia Twoich zamówień</h2>
+
+@if (!Model.Any())
+{
+    <p>Nie masz jeszcze żadnych zamówień.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Data zamówienia</th>
+                <th>Szczegóły zamówienia</th>
+                <th>Całkowita cena</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var zamowienie in Model)
+            {
+                <tr>
+                    <td>@zamowienie.DataUtworzenia.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td>
+                        <ul>
+                            @foreach (var pozycja in zamowienie.Pozycje)
+                            {
+                                <li>@pozycja.Danie?.Nazwa - Ilość: @pozycja.Ilosc</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>@zamowienie.Pozycje.Sum(p => p.Danie.Cena * p.Ilosc).ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

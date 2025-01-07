@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-
-namespace Restaurant
+namespace Restaurant.models
 {
     public class Uzytkownik : IdentityUser { }
 }
