@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Restaurant.models.Zamowienie>
+﻿@model IEnumerable<Restaurant.Models.Zamowienie>
 
 <h2>Historia Twoich zamówień</h2>
 
@@ -29,7 +29,7 @@ else
                             }
                         </ul>
                     </td>
-                    <td>@zamowienie.Pozycje.Sum(p => p.Danie.Cena * p.Ilosc).ToString("C")</td>
+                    <td>@zamowienie.Pozycje.Sum(p => p.Danie.Cena * p.Ilosc)</td>
                 </tr>
             }
         </tbody>

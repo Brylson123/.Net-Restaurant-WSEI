@@ -1,10 +1,11 @@
-﻿@model Restaurant.models.Zamowienie
+﻿@model Restaurant.Models.Zamowienie
 
 <h2>Szczegóły zamówienia</h2>
 
 <p><strong>ID zamówienia:</strong> @Model.Id</p>
 <p><strong>Użytkownik:</strong> @Model.Uzytkownik?.Email</p>
 <p><strong>Data zamówienia:</strong> @Model.DataUtworzenia.ToString("g")</p>
+<p><strong>Adres dostawy:</strong> @Model.Adres</p>
 
 <h4>Pozycje:</h4>
 <table class="table">
@@ -12,7 +13,8 @@
         <tr>
             <th>Nazwa dania</th>
             <th>Ilość</th>
-            <th>Cena</th>
+            <th>Cena jednostkowa</th>
+            <th>Łączna cena</th>
         </tr>
     </thead>
     <tbody>
@@ -21,10 +23,16 @@
             <tr>
                 <td>@pozycja.Danie?.Nazwa</td>
                 <td>@pozycja.Ilosc</td>
-                <td>@(pozycja.Danie?.Cena * pozycja.Ilosc)</td>
+                <td>@pozycja.Danie?.Cena</td>
+                <td>@(pozycja.Danie?.Cena * pozycja.Ilosc)?.ToString("C")</td>
             </tr>
         }
     </tbody>
 </table>
+
+<p>
+    <strong>Łączna wartość zamówienia:</strong>
+    @Model.Pozycje?.Sum(p => p.Danie?.Cena * p.Ilosc)
+</p>
 
 <a asp-action="ManageZamowienia" class="btn btn-secondary">Powrót</a>

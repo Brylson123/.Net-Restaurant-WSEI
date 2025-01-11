@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Restaurant.models.Zamowienie>
+﻿@model IEnumerable<Restaurant.Models.Zamowienie>
 
 <h2>Zarządzanie zamówieniami</h2>
 <table class="table">
@@ -8,6 +8,7 @@
             <th>Użytkownik</th>
             <th>Data</th>
             <th>Liczba pozycji</th>
+            <th>Adres</th>
             <th>Akcje</th>
         </tr>
     </thead>
@@ -19,6 +20,7 @@
                 <td>@zamowienie.Uzytkownik?.Email</td>
                 <td>@zamowienie.DataUtworzenia</td>
                 <td>@zamowienie.Pozycje?.Count</td>
+                <td>@zamowienie.Adres</td>
                 <td>
                     <a asp-action="ZamowienieDetails" asp-route-id="@zamowienie.Id" class="btn btn-info">Szczegóły</a>
                     <form asp-action="DeleteZamowienie" asp-route-id="@zamowienie.Id" method="post" class="d-inline">

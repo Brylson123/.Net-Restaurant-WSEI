@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Restaurant.models;
+using Restaurant.Models;
 using System.Security.Claims;
 
 namespace Restaurant
@@ -22,9 +22,9 @@ namespace Restaurant
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Dictionary<int, int> wybrane)
+        public async Task<IActionResult> Create(string adres, Dictionary<int, int> wybrane)
         {
-            if (wybrane == null || !wybrane.Any(x => x.Value > 0))
+            if (string.IsNullOrEmpty(adres) || wybrane == null || !wybrane.Any(x => x.Value > 0))
                 return View(await _context.Dania.ToListAsync());
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -32,6 +32,7 @@ namespace Restaurant
             {
                 UzytkownikId = userId,
                 DataUtworzenia = DateTime.Now,
+                Adres = adres,
                 Pozycje = new List<PozycjaZamowienia>()
             };
 

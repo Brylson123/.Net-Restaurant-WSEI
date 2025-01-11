@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Restaurant.models.Danie>
+﻿@model IEnumerable<Restaurant.Models.Danie>
 
 <h2>Zarządzanie daniami</h2>
 <table class="table">
@@ -15,7 +15,7 @@
         {
             <tr>
                 <td>@danie.Nazwa</td>
-                <td>@danie.Cena.ToString("C")</td>
+                <td>@danie.Cena</td>
                 <td>@danie.KategoriaDania?.Nazwa</td>
                 <td>
                     <a asp-action="Edit" asp-controller="Dania" asp-route-id="@danie.Id" class="btn btn-primary">Edytuj</a>

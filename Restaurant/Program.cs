@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Restaurant.models;
+using Restaurant.Models;
 
 namespace Restaurant
 {
@@ -56,6 +56,8 @@ namespace Restaurant
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<Uzytkownik>>();
+            var dbContext = serviceProvider.GetRequiredService<RestaurantDbContext>();
+
 
             if (!roleManager.RoleExistsAsync("Admin").Result)
             {
@@ -66,6 +68,7 @@ namespace Restaurant
             {
                 roleManager.CreateAsync(new IdentityRole("User")).Wait();
             }
+
 
             if (!userManager.Users.Any(u => u.UserName == "admin@restaurant.com"))
             {
@@ -80,6 +83,18 @@ namespace Restaurant
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(admin, "Admin").Wait();
+                }
+
+                if (!dbContext.Kategorie.Any())
+                {
+                    dbContext.Kategorie.AddRange(
+                        new KategoriaDania { Nazwa = "Przystawki" },
+                        new KategoriaDania { Nazwa = "Dania g³ówne" },
+                        new KategoriaDania { Nazwa = "Desery" },
+                        new KategoriaDania { Nazwa = "Napoje" }
+                    );
+
+                    dbContext.SaveChanges();
                 }
             }
         }

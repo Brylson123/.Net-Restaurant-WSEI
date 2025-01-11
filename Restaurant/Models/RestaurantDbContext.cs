@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Restaurant.models
+namespace Restaurant.Models
 {
     public class RestaurantDbContext : IdentityDbContext<Uzytkownik>
     {
