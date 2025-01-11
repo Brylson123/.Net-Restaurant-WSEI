@@ -84,18 +84,17 @@ namespace Restaurant
                 {
                     userManager.AddToRoleAsync(admin, "Admin").Wait();
                 }
+            }
+            if (!dbContext.Kategorie.Any())
+            {
+                dbContext.Kategorie.AddRange(
+                    new KategoriaDania { Nazwa = "Przystawki" },
+                    new KategoriaDania { Nazwa = "Dania g³ówne" },
+                    new KategoriaDania { Nazwa = "Desery" },
+                    new KategoriaDania { Nazwa = "Napoje" }
+                );
 
-                if (!dbContext.Kategorie.Any())
-                {
-                    dbContext.Kategorie.AddRange(
-                        new KategoriaDania { Nazwa = "Przystawki" },
-                        new KategoriaDania { Nazwa = "Dania g³ówne" },
-                        new KategoriaDania { Nazwa = "Desery" },
-                        new KategoriaDania { Nazwa = "Napoje" }
-                    );
-
-                    dbContext.SaveChanges();
-                }
+                dbContext.SaveChanges();
             }
         }
     }
