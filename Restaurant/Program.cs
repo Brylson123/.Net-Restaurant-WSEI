@@ -4,11 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Restaurant.Models;
 
 namespace Restaurant
-{
-    public class ApplicationDbContext : IdentityDbContext
-    {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-    }
+{   
 
     public class Program
     {
@@ -85,6 +81,7 @@ namespace Restaurant
                     userManager.AddToRoleAsync(admin, "Admin").Wait();
                 }
             }
+
             if (!dbContext.Kategorie.Any())
             {
                 dbContext.Kategorie.AddRange(

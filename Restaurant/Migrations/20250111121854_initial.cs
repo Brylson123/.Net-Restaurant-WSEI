@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Restaurant.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -174,7 +174,8 @@ namespace Restaurant.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UzytkownikId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    DataUtworzenia = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DataUtworzenia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Adres = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
